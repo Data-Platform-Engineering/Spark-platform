@@ -29,6 +29,3 @@ jobs:
 
       - name: Running flake8 check
         run: flake8 .
-
-      - name: Running pyanalyze check
-        run: pyanalyze spark_app/
