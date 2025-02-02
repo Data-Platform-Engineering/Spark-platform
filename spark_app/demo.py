@@ -1,6 +1,6 @@
 from pyspark.sql import SparkSession
 
-spark = SparkSession.builder.appName("demo").getOrCreate()
+spark = SparkSession.builder.appName("demo1").getOrCreate()
 
 df = spark.createDataFrame(
     [
