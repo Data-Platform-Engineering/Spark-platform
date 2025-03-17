@@ -54,3 +54,12 @@ resource "aws_subnet" "public-subnet" {
   }
 }
 
+# Creating internet gateway and attaching to VPC
+resource "aws_internet_gateway" "emr-igw" {
+  vpc_id = aws_vpc.emr-vpc.id
+
+  tags = {
+    Name = "emr-igw"
+  }
+}
+
