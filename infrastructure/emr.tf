@@ -76,3 +76,10 @@ resource "aws_route_table" "public-rt" {
     Name = "public-rt"
   }
 }
+
+
+# Making explicit association of public subnet to route table
+resource "aws_route_table_association" "public-subnet-association" {
+  subnet_id      = aws_subnet.public-subnet.id
+  route_table_id = aws_route_table.public-rt.id
+}
