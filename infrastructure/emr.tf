@@ -41,44 +41,16 @@ resource "aws_subnet" "private-subnet" {
   }
 }
 
-# # Creating public subnet
-# resource "aws_subnet" "public-subnet" {
-#   vpc_id     = aws_vpc.custom-vpc.id
-#   cidr_block = "10.0.2.0/24"
-#   availability_zone = "eu-central-1b"
-#   map_public_ip_on_launch = true
 
-#   tags = {
-#     Name = "public-subnet"
-#   }
-# }
+# Creating public subnet
+resource "aws_subnet" "public-subnet" {
+  vpc_id     = aws_vpc.custom-vpc.id
+  cidr_block = "10.0.2.0/24"
+  availability_zone = "eu-central-1b"
+  map_public_ip_on_launch = true
 
-# # Creating internet gateway and attaching to VPC
-# resource "aws_internet_gateway" "emr-igw" {
-#   vpc_id = aws_vpc.emr-vpc.id
+  tags = {
+    Name = "public-subnet"
+  }
+}
 
-#   tags = {
-#     Name = "emr-igw"
-#   }
-# }
-
-# # Creating route table
-# resource "aws_route_table" "public-rt" {
-#   vpc_id = aws_vpc.emr-vpc.id
-
-#   route {
-#     cidr_block = "0.0.0.0/0"
-#     gateway_id = aws_internet_gateway.emr-igw.id
-#   }
-
-#   tags = {
-#     Name = "public-rt"
-#   }
-# }
-
-
-# # Making explicit association of public subnet to route table
-# resource "aws_route_table_association" "public-subnet-association" {
-#   subnet_id      = aws_subnet.public-subnet.id
-#   route_table_id = aws_route_table.public-rt.id
-# }
