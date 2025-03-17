@@ -1,22 +1,3 @@
-# # VPC Stacks
-
-# # VPC
-# resource "aws_vpc" "main" {
-#   cidr_block = "10.0.0.0/16"
-# }
-
-# # Subnet
-
-# resource "aws_subnet" "main" {
-#   vpc_id     = aws_vpc.main.id
-#   cidr_block = "10.0.1.0/24"
-
-#   tags = {
-#     Name = "Public Subnet"
-#   }
-# }
-
-
 
 # Provisioning the VPC
 
@@ -32,7 +13,7 @@ resource "aws_vpc" "emr-vpc" {
 
 # Creating private subnet
 resource "aws_subnet" "private-subnet" {
-  vpc_id     = aws_vpc.custom-vpc.id
+  vpc_id     = aws_vpc.emr-vpc.id
   cidr_block = "10.0.1.0/24"
   availability_zone = "eu-central-1a"
 
@@ -44,7 +25,7 @@ resource "aws_subnet" "private-subnet" {
 
 # Creating public subnet
 resource "aws_subnet" "public-subnet" {
-  vpc_id     = aws_vpc.custom-vpc.id
+  vpc_id     = aws_vpc.emr-vpc.id
   cidr_block = "10.0.2.0/24"
   availability_zone = "eu-central-1b"
   map_public_ip_on_launch = true
@@ -83,3 +64,4 @@ resource "aws_route_table_association" "public-subnet-association" {
   subnet_id      = aws_subnet.public-subnet.id
   route_table_id = aws_route_table.public-rt.id
 }
+
