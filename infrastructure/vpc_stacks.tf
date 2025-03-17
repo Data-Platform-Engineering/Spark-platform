@@ -1,5 +1,5 @@
 
-# Provisioning the VPC
+# Provisioning the VPC where EMR will be deployed
 
 resource "aws_vpc" "emr-vpc" {
   cidr_block       = "10.0.0.0/16"
@@ -7,7 +7,10 @@ resource "aws_vpc" "emr-vpc" {
   enable_dns_hostnames = true
 
   tags = {
-    Name = "emr-vpc"
+    Name = "production-emr"
+    environment = "production"
+    owner = "data_platform_team"
+    managed_by = "terraform"
   }
 }
 
