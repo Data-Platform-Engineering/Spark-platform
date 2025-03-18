@@ -4,4 +4,4 @@ namespace: company.team
 tasks:
   - id: hello
     type: io.kestra.plugin.core.log.Log
-    message: Hello World 222222vhsgfyfg! 🚀
+    message: Hello World 22222vhsgfyfg! 🚀
