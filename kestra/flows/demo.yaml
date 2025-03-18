@@ -1,5 +1,5 @@
 id: crow_328263
-namespace: company.team
+namespace: git
 
 tasks:
   - id: hello
