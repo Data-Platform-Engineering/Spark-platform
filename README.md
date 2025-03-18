@@ -15,3 +15,11 @@ You will use Step Functions to:
 4.	Terminate the cluster, after running the application
 
 
+## TO USE THE CD
+
+- Run `brew install ngrok`
+- Run `ngrok http http://0.0.0.0:8080 --host-header=rewrite`
+  - Copy the new URL into your action
+
+##   CONSIDERATIONS USING THE CD
+- Make sure your namespace is aligned
