@@ -21,4 +21,4 @@ jobs:
         with:
           resource: flow
           directory: ./kestra/flows
-          server: https://891b-2003-c7-3748-a42-f47d-ad31-63cc-1d35.ngrok-free.app
+          server: https://0c93-2003-c7-3748-a42-f47d-ad31-63cc-1d35.ngrok-free.app
