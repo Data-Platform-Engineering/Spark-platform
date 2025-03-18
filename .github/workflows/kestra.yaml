@@ -1,0 +1,24 @@
+name: Kestra CI Pipeline
+
+on:
+  push:
+    branches:
+      - "**"
+    paths:
+      - "**/*.yaml"
+      
+jobs:
+  lint:
+    name: checkout
+    runs-on: ubuntu-20.04
+
+    steps:
+      - name: Checkout repo content
+        uses: actions/checkout@v4
+
+      - name: flow update namespace action
+        uses: kestra-io/validate-action@master
+        with:
+          resource: flow
+          directory: ./kestra/flows
+          server: https://0957-2003-c7-3748-a42-f47d-ad31-63cc-1d35.ngrok-free.app
