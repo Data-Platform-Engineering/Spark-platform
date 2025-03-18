@@ -16,9 +16,17 @@ jobs:
       - name: Checkout repo content
         uses: actions/checkout@v4
 
-      - name: flow update namespace action
+      - name: Validate Flow
         uses: kestra-io/validate-action@master
         with:
+          resource: flow
+          directory: ./kestra/flows
+          server: https://1acd-2003-c7-3748-a18-1591-54af-34ea-abd2.ngrok-free.app
+
+      - name: Deploy Flow
+        uses: kestra-io/deploy-action@master
+        with:
+          namespace: git
           resource: flow
           directory: ./kestra/flows
           server: https://1acd-2003-c7-3748-a18-1591-54af-34ea-abd2.ngrok-free.app
