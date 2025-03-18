@@ -2,6 +2,6 @@ id: crow_328263
 namespace: git
 
 tasks:
-  - id: hello
+   id: hello
     type: io.kestra.plugin.core.log.Log
-    message: Hello World mayowa! 🚀
+    message: Hello World mayowa! 
