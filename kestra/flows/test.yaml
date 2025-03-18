@@ -4,4 +4,4 @@ namespace: git
 tasks:
   - id: hello
     type: io.kestra.plugin.core.log.Log
-    message: Hello World 333333! 🚀
+    message: Hello World 55555555! 🚀
