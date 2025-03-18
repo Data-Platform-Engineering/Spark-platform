@@ -1,5 +1,5 @@
-id: crow_328263
-namespace: testing_sync
+id: testing-sync
+namespace: git
 
 tasks:
   - id: hello
