@@ -5,7 +5,7 @@ on:
     branches:
       - "**"
     paths:
-      - "kestra/*.yaml"
+      - "**/*.yaml"
       
 jobs:
   lint:
