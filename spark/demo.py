@@ -1,56 +1,10 @@
-import logging
-
-import awswrangler as wr
-import boto3
-import pandas as pd
-from faker import Faker
-
-logging.basicConfig(format='%(asctime)s %(levelname)s:%(name)s:%(message)s')
-logging.getLogger().setLevel(20)
 
 
-# def aws_sesion():
-#     session = boto3.Session(
-#                     aws_access_key_id="xxxx",
-#                     aws_secret_access_key="xxxx",
-#                     region_name="eu-central-1"
-#     )
-#     return session
+from pyspark.sql import SparkSession
+
+spark = SparkSession.builder.appName("demo").getOrCreate()
+
+df = spark.read.parquet("s3a://spark-job-source-datasets/random_user_profile/")
 
 
-def random_profile_data_generator(total_records: int):
-    """
-       Function that generates random profile for
-       different individuals and build a pandas dataframe
-       based on the number of profile specified...
-
-       params:
-            total_records: Total number of random profiles
-            to generate, needs to be an integer, e.g 100, 2.
-    """
-
-    sample = Faker()
-    logging.info("finished faker module instantiation.")
-
-    df = pd.DataFrame(
-        [sample.profile() for profile in range(total_records)])
-    logging.info(f"Dataframe created with {df.shape[1]}\
-                              records and {df.shape[0]} columns")
-
-    return df
-
-
-
-
-def extract_random_profile_to_s3():
-    wr.s3.to_parquet(
-                    df=random_profile_data_generator(500),
-                    path="s3://spark-job-source-datasets/random_user_profile/",
-                    boto3_session=aws_sesion(),
-                    mode="append",
-                    dataset=True
-                    )
-    return "Data successfully written to s3"
-
-print(extract_random_profile_to_s3())
-
+df.show()
