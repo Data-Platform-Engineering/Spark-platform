@@ -1,0 +1,28 @@
+id: aws_emr_create_cluster
+namespace: production
+
+tasks:
+  - id: create_cluster_submit_spark_job
+    type: io.kestra.plugin.aws.emr.CreateClusterAndSubmitSteps
+    accessKeyId: "xxxxxxxx"
+    secretKeyId: "xxxxxxxx"
+    region: eu-central-1
+    clusterName: "Spark job cluster"
+    logUri: "s3://quick-test-emr-logs/kestra"
+    keepJobFlowAliveWhenNoSteps: false
+    applications:
+        - Spark
+    masterInstanceType: m5.xlarge
+    slaveInstanceType: m5.xlarge
+    instanceCount: 2
+    ec2KeyName: terraformed_emr_key_pair
+    ec2SubnetId: subnet-0a9ae40d576e7f63a
+    jobFlowRole: kestra-emr-instance-profile-role
+    serviceRole: kestra-emr-role
+    steps:
+        - name: Kestra_Spark_job_test
+          jar: "command-runner.jar"
+          actionOnFailure: TERMINATE_JOB_FLOW
+          commands:
+            - spark-submit s3://quick-test-emr-logs/spark_file/my_spark.py
+    wait: true

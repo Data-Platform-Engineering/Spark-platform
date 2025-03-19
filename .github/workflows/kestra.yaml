@@ -21,7 +21,7 @@ jobs:
         with:
           resource: flow
           directory: ./kestra/flows/namespace
-          server: https://3543-2003-c7-3748-a18-1591-54af-34ea-abd2.ngrok-free.app
+          server: https://b505-2003-c7-3748-a18-1591-54af-34ea-abd2.ngrok-free.app
 
       - name: Deploy Flow
         uses: kestra-io/deploy-action@master
@@ -29,4 +29,4 @@ jobs:
           namespace: git
           directory: ./kestra/flows/namespace/production
           resource: flow
-          server: https://3543-2003-c7-3748-a18-1591-54af-34ea-abd2.ngrok-free.app
+          server: https://b505-2003-c7-3748-a18-1591-54af-34ea-abd2.ngrok-free.app
