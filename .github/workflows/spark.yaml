@@ -1,21 +1,25 @@
 name: Upload to S3
 
 on:
-  workflow_run:
-    workflows: ["CI Pipeline"]
-    types: [completed]
-
-# on:
-#   push:
-#     branches:
-#       - "**"
-#     paths:
-#       - "spark/demo.py"
+  push:
+    branches:
+      - "**"
+    paths:
+      - "spark/demo.py"
 
 jobs:
   upload:
     runs-on: ubuntu-latest
     steps:
+
+      - name: Wait for CI to succeed
+        uses: lewagon/wait-on-check-action@v1.3.4
+        with:
+          ref: ${{ github.ref }}
+          check-name: 'CI Pipeline'
+          repo-token: ${{ secrets.TOKEN_SECRET }}
+          wait-interval: 10
+
       - name: Checkout repo content
         uses: actions/checkout@v4
 
