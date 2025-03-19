@@ -9,13 +9,13 @@ logging.basicConfig(format='%(asctime)s %(levelname)s:%(name)s:%(message)s')
 logging.getLogger().setLevel(20)
 
 
-def aws_sesion():
-    session = boto3.Session(
-                    aws_access_key_id="xxxx",
-                    aws_secret_access_key="xxxx",
-                    region_name="eu-central-1"
-    )
-    return session
+# def aws_sesion():
+#     session = boto3.Session(
+#                     aws_access_key_id="xxxx",
+#                     aws_secret_access_key="xxxx",
+#                     region_name="eu-central-1"
+#     )
+#     return session
 
 
 def random_profile_data_generator(total_records: int):
