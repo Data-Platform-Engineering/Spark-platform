@@ -26,6 +26,6 @@ jobs:
           command: cp
           source: kestra/demo.py
           destination: s3://spark-job-source-datasets/folder/demo.py
-          aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws_access_key_id: ${{ secrets.AWS_KEY_ID }}
           aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws_region: eu-central-1
