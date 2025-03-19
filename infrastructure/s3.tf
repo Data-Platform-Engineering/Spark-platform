@@ -1,26 +1,50 @@
 resource "aws_s3_bucket" "s3-input" {
-  bucket = "ayomayowa-emr-input-bucket"
+  bucket = "spark-job-data-input"
 
   tags = {
     Service     = "EMR"
-    Environment = "Dev"
+    Environment = "Production"
   }
 }
 
 resource "aws_s3_bucket" "s3-output" {
-  bucket = "ayomayowa-emr-output-bucket"
+  bucket = "spark-job-data-output"
 
   tags = {
     Service     = "EMR"
-    Environment = "Dev"
+    Environment = "Production"
   }
 }
 
 resource "aws_s3_bucket" "s3-logs" {
-  bucket = "ayomayowa-emr-logs-bucket"
+  bucket = "emr-cluster-spark-logs"
 
   tags = {
     Service     = "EMR"
-    Environment = "Dev"
+    Environment = "Production"
+  }
+}
+
+
+resource "aws_s3_bucket_versioning" "s3-input-versioning" {
+  bucket = aws_s3_bucket.s3-input.id
+  versioning_configuration {
+    status = "Enabled"
+  }
+}
+
+
+resource "aws_s3_bucket_versioning" "s3-output-versioning_example" {
+  bucket = aws_s3_bucket.s3-output.id
+  versioning_configuration {
+    status = "Enabled"
+  }
+}
+
+
+resource "aws_s3_bucket_versioning" "s3-logs-versioning_example" {
+  bucket = aws_s3_bucket.s3-logs.id
+  versioning_configuration {
+    status = "Enabled"
   }
 }
