@@ -5,7 +5,7 @@ on:
     branches:
       - "**"
     paths:
-      - "spark/*.py"
+      - "spark/demo.py"
 
 jobs:
   upload:
