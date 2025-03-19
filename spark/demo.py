@@ -30,7 +30,7 @@ def random_profile_data_generator(total_records: int):
     """
 
     sample = Faker()
-    logging.info("finished faker module instantiation...")
+    logging.info("finished faker module instantiation")
 
     df = pd.DataFrame(
         [sample.profile() for profile in range(total_records)])
