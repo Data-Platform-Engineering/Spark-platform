@@ -13,10 +13,19 @@ jobs:
     steps:
       - name: Checkout repo content
         uses: actions/checkout@v4
-      - uses: shallwefootball/s3-upload-action@master
+      # - uses: shallwefootball/s3-upload-action@master
+      #   with:
+      #     aws_key_id: ${{ secrets.AWS_KEY_ID }}
+      #     aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY}}
+      #     aws_bucket: spark-job-source-datasets
+      #     source_dir: 'spark'
+      #     destination_dir: spark_input_data
+
+      - uses: keithweaver/aws-s3-github-action@v1.0.0
         with:
-          aws_key_id: ${{ secrets.AWS_KEY_ID }}
-          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY}}
-          aws_bucket: spark-job-source-datasets
-          source_dir: 'spark'
-          destination_dir: spark_input_data
+          command: cp
+          source: ./kestra/demo.py
+          destination: s3://spark-job-source-datasets/folder/demo.py
+          aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws_region: eu-central-1
