@@ -18,5 +18,5 @@ jobs:
           aws_key_id: ${{ secrets.AWS_KEY_ID }}
           aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY}}
           aws_bucket: spark-job-source-datasets
-          source_dir: 'spark'
-          destination_dir: spark_input_data
+          # source_dir: 'spark'
+          # destination_dir: spark_input_data
