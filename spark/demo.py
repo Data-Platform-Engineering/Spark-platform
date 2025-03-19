@@ -22,7 +22,7 @@ def random_profile_data_generator(total_records: int):
     """
        Function that generates random profile for
        different individuals and build a pandas dataframe
-       based on the number of profile specified.
+       based on the number of profile specified...
 
        params:
             total_records: Total number of random profiles
