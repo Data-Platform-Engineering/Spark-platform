@@ -4,8 +4,8 @@ namespace: production
 tasks:
   - id: create_cluster_submit_spark_job
     type: io.kestra.plugin.aws.emr.CreateClusterAndSubmitSteps
-    accessKeyId: "xxxxxxxx"
-    secretKeyId: "xxxxxxxx"
+    accessKeyId: "SecretToAccessKey"
+    secretKeyId: "SecretToSecretAccessKey"
     region: eu-central-1
     clusterName: "Spark job cluster"
     logUri: "s3://quick-test-emr-logs/kestra"
