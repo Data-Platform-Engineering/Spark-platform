@@ -18,4 +18,4 @@ jobs:
           aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY}}
           aws_bucket: spark-job-data-input
           source_dir: 'spark'
-          destination_dir: spark_input_data
+          destination_dir: /spark_input_data/
