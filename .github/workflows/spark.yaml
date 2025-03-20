@@ -12,13 +12,22 @@ jobs:
     runs-on: ubuntu-latest
     steps:
 
-      - name: Wait for CI to succeed
-        uses: lewagon/wait-on-check-action@master
+      - name: checkout git repository
+        uses: actions/checkout@v2
+
+      - name: Set up python environment
+        uses: actions/setup-python@v2
         with:
-          ref: ${{ github.sha }}
-          check-name: 'CI Pipeline'
-          repo-token: ${{ secrets.TOKEN_SECRET }}
-          wait-interval: 10
+          python-version: "3.9.0"
+
+      - name: install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Running isort check
+        run: isort --check-only  .
+
+      - name: Running flake8 check
+        run: flake8 .
 
       - name: Checkout repo content
         uses: actions/checkout@v4
