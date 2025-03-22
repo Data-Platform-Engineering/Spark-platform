@@ -25,26 +25,22 @@ This project aim to setup a `BIG DATA` processing platform using Apache Spark as
       - Dedicated network for EMR Cluster
 - Kestra
   - This directory contains all flows that will be launched on the Kestra instance and different namespace.
+  - The flow in this directory do 3 things
+    - Create an EMR Cluster with Apache Spark running on it
+    - Submit a Spark Application task to the EMR Cluster to run the job.
+    - Terminate as soon as the Spark job is done.
 - Spark
   - This directory contains all Spark Application
 - .github
   - This directory contains the following
     - Github Action workflow that automatically validate and deploy our flows to a running Kestra instance whenever there is any changes.
     - Github Action Wworkflow that automatically validate and push our spark application to Amazon s3 whenever there is any changes.
+    - NOTE
+      - To be able to get the value for the server in the kestra.yaml, you need ngrok
+        - Run `brew install ngrok` on your terminal for Mac user.
+        - signup on `ngrok.com`
+        - Run `ngrok config add-authtoken YourTokenFromTheWebsiteAfterSignUp` on your terminal.
 
-![Excalidraw Diagram](Excalidraw.png)
-
-
-For each group, you are to create a VPC, 
-
-
-In your repository, you would use GitHub as well for CI/CD TO pick python file/spark application from your local and deploy to the cloud (AWS S3)
-
-You will use Step Functions to:
-1.	Fetch the python file (which should have now been uploaded in s3).
-2.	To create an EMR cluster  
-3.	Run Step
-4.	Terminate the cluster, after running the application
 
 
 ## TO USE THE CD
