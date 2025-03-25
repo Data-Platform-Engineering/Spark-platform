@@ -32,4 +32,4 @@ aggregated_df = df.groupBy("Category").agg(
 aggregated_df.show()
 
 # Send to s3
-df.write.format("parquet").mode("overwrite").save("s3://spark-job-data-output/")
+df.write.format("parquet").mode("overwrite").save("s3://spark-job-data-output/output.parquet")
