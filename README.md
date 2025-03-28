@@ -1,5 +1,5 @@
 # Spark-platform
-This project aim to setup a `BIG DATA` processing platform using Apache Spark as the bid data processing tool. This platform has different components that form the entire platform. The end goal is to have a platform that automatically run our big data workloads at a specific time.
+This project aim to setup a `BIG DATA` processing platform using Apache Spark as the big data processing tool. This platform has different components that form the entire platform. The end goal is to have a platform that automatically run our big data workloads at a specific time.
 
 # Platform Tool Stacks
 - Kubernetes
