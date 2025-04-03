@@ -79,8 +79,11 @@ over_time = StructField("OverTime",StringType(),True)
 columnList = [age, attrition, business_travel,department,Dist_from_home,education,emp_no,env_satisfaction,gender,hourly_rate,jobinvolvement,job_level,job_role,job_satisfaction,marital_status,monthly_income,monthly_rate,no_of_comp_worked,over18,over_time]
 empDfSchema = StructType(columnList)
 
-empDf = spark.read.csv('s3://spark-job-source-datasets/emp_dataset.csv', header=True,schema=empDfSchema)
+# empDf = spark.read.csv('s3://spark-job-source-datasets/emp_dataset.csv', header=True,schema=empDfSchema)
 #  empDf = spark.read.csv('/Users/user/Downloads/emp_dataset.csv', header=True,schema=empDfSchema)
+
+empDf = spark.read.csv('s3://spark-data-sources/emp_dataset.csv', header=True,schema=empDfSchema)
+
 
 empDf.show(4)
 
