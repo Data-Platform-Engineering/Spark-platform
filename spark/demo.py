@@ -94,7 +94,7 @@ empDf.groupBy("BusinessTravel").agg({"Age": "sum"}).sort("BusinessTravel").show(
 rename_df = empDf.withColumnRenamed('sum(Age)', 'total_age')
 
 
-# grouponGender = empDf.groupBy("Gender").agg({"Age": "sum"}).sort("Gender").show()
+grouponGender = empDf.groupBy("Gender").agg({"Age": "sum"}).sort("Gender").show() # added
 # sumOfmonthIncome = empDf.groupBy("Gender").agg({"MonthlyIncome": "sum"}).sort("MonthlyIncome")
 
 # rename_df = df.withColumnRenamed('sum(Age)', 'total_age')
@@ -118,7 +118,7 @@ rename_df = empDf.withColumnRenamed('sum(Age)', 'total_age')
 # sumOfmonthIncome.write.format("parquet").mode("overwrite").save("s3://spark-job-data-output/sumofMonthIncome.parquet")
 
 rename_df.write.parquet("s3a://spark-job-data-output/spark_output/employees/",mode="overwrite")
-# grouponGender.write.parquet("s3a://spark-job-data-output/spark_output/employees/",mode="overwrite")
+grouponGender.write.parquet("s3a://spark-job-data-output/spark_output/employees/",mode="overwrite") #uncommented
 # sumOfmonthIncome.write.parquet("s3a://spark-job-data-output/spark_output/employees/",mode="overwrite")
 
 # Send to s3
