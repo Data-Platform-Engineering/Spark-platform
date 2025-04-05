@@ -55,79 +55,24 @@ spark = SparkSession.builder \
 # Reduce log noise (optional)
 spark.sparkContext.setLogLevel("WARN")
 
-# age = StructField("Age",IntegerType(),True)
-# attrition = StructField("Attrition",StringType(),True)
-# business_travel = StructField("BusinessTravel",StringType(),True)
-# department = StructField("Department",StringType(),True)
-# Dist_from_home = StructField("DistanceFromHome",IntegerType(),True)
-# education = StructField("EducationField",StringType(),True)
-# emp_no = StructField("EmployeeNumber",IntegerType(),True)
-# env_satisfaction = StructField("EnvironmentSatisfaction",IntegerType(),True)
-# gender = StructField("Gender",StringType(),True)
-# hourly_rate = StructField("HourlyRate",IntegerType(),True)
-# jobinvolvement = StructField("JobInvolvement",IntegerType(),True)
-# job_level = StructField("JobLevel",IntegerType(),True)
-# job_role = StructField("JobRole",StringType(),True)
-# job_satisfaction = StructField("JobSatisfaction",IntegerType(),True)
-# marital_status = StructField("MaritalStatus",StringType(),True)
-# monthly_income = StructField("MonthlyIncome",IntegerType(),True)
-# monthly_rate = StructField("MonthlyRate",IntegerType(),True)
-# no_of_comp_worked= StructField("NumCompaniesWorked",IntegerType(),True)
-# over18 = StructField("Over18",StringType(),True)
-# over_time = StructField("OverTime",StringType(),True)
 
-# columnList = [age, attrition, business_travel,department,Dist_from_home,education,emp_no,env_satisfaction,gender,hourly_rate,jobinvolvement,job_level,job_role,job_satisfaction,marital_status,monthly_income,monthly_rate,no_of_comp_worked,over18,over_time]
-# empDfSchema = StructType(columnList)
+df = spark.read.csv('s3://spark-data-sources/emp_dataset.csv', header=True, inferSchema=True)
 
-# # empDf = spark.read.csv('s3://spark-job-source-datasets/emp_dataset.csv', header=True,schema=empDfSchema)
-# #  empDf = spark.read.csv('/Users/user/Downloads/emp_dataset.csv', header=True,schema=empDfSchema)
-
-# empDf = spark.read.csv('s3://spark-data-sources/emp_dataset.csv', header=True,schema=empDfSchema)
-
-empDf = spark.read.csv('s3://spark-data-sources/emp_dataset.csv', header=True, inferSchema=True)
-
-empDf.show(4)
-
-empDf.groupBy("BusinessTravel").agg({"Age": "sum"}).sort("BusinessTravel").show()
+df.groupBy("BusinessTravel").agg({"Age": "sum"}).sort("BusinessTravel").show()
+df = df.groupBy("BusinessTravel").agg({"Age": "sum"}).sort("BusinessTravel")
+rename_df = df.withColumnRenamed('sum(Age)', 'total_age')
+rename_df.show()
+rename_df.write.parquet("s3a://spark-job-data-output/spark_output/employee_ayo/",mode="overwrite")
 
 
-rename_df = empDf.withColumnRenamed('sum(Age)', 'total_age')
+# empDf = spark.read.csv('s3://spark-data-sources/emp_dataset.csv', header=True, inferSchema=True)
+# empDf.show(4)
 
-grouponBusinessTravel = rename_df.groupBy("Gender").agg({"Age": "sum"}).sort("Gender").show() #added now
-grouponGender = empDf.groupBy("Gender").agg({"Age": "sum"}).sort("Gender").show() 
-# sumOfmonthIncome = empDf.groupBy("Gender").agg({"MonthlyIncome": "sum"}).sort("MonthlyIncome")
-
-# rename_df = df.withColumnRenamed('sum(Age)', 'total_age')
-
-# rename_df.show()
-
-# groupedOnBusinessTravel = empDf.groupby(["BusinessTravel"]).mean()
-# groupedOnBusinessTravel.show()
-
-# grouponGender = empDf.groupby(["Gender"]).mean()
-# grouponGender.show(4)
-
-# sumOfmonthIncome = empDf.groupby("Gender").sum("MonthlyIncome")
-# sumOfmonthIncome.show()
+# business = empDf.groupBy("BusinessTravel").agg({"Age": "sum"}).sort("BusinessTravel").show()
 
 
+# rename_df = business.withColumnRenamed('sum(Age)', 'total_age')
 
-# Send to s3
-# groupedOnBusinessTravel.write.format("parquet").mode("overwrite").save("s3://spark-job-data-output/groupedOnBusinessTravel.parquet")
-# grouponGender.write.format("parquet").mode("overwrite").save("s3://spark-job-data-output/grouponGender.parquet")
-# sumOfmonthIncome.write.format("parquet").mode("overwrite").save("s3://spark-job-data-output/sumofMonthIncome.parquet")
-
-grouponBusinessTravel.write.parquet("s3a://spark-job-data-output/spark_output/employees/grouponBusinessTravel.parquet",mode="overwrite")
-grouponGender.write.parquet("s3a://spark-job-data-output/spark_output/employees/grouponGender.parquet",mode="overwrite") #uncommented
-# sumOfmonthIncome.write.parquet("s3a://spark-job-data-output/spark_output/employees/",mode="overwrite")
-
-# Send to s3
-# groupedOnBusinessTravel.write.format("parquet").mode("overwrite").save("s3://spark-job-data-output")
-# grouponGender.write.format("parquet").mode("overwrite").save("s3://spark-job-data-output")
-# sumOfmonthIncome.write.format("parquet").mode("overwrite").save("s3://spark-job-data-output")
-
-
-# Send to local
-# groupedOnBusinessTravel.write.format("csv").mode("append").save("groupedOnBusinessTravel.csv")
-# grouponGender.write.format("csv").mode("overwrite").save("grouponGender.csv")
-# sumOfmonthIncome.write.format("csv").mode("overwrite").save("sumOfmonthIncome.csv")
+# grouponBusinessTravel = rename_df #added now
+# grouponGender = empDf.groupBy("Gender").agg({"Age": "sum"}).withColumnRenamed('sum(Age)', 'total_age').show() 
+# sumOfmonthIncome = empDf.groupBy("Gender").agg({"MonthlyIncome": "sum"}).withColumnRenamed('sum(Age)', 'total_age').show()
